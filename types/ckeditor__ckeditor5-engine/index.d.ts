@@ -1259,6 +1259,22 @@ export namespace view {
         // TODO
     }
 
+    // engine/view/stylesmap
+
+    class StylesMap {
+        // TODO
+
+        // Properties
+        isEmpty: boolean;
+        size: number;
+
+        constructor(styleProcessor: StylesProcessor);
+    }
+
+    class StylesProcessor {
+        // TODO
+    }
+
     // engine/view/text
 
     class Text extends Node {
@@ -1345,8 +1361,20 @@ export namespace view {
 
     // engine/view/view
 
+    /**
+     * @see <a href="https://ckeditor.com/docs/ckeditor5/latest/api/module_engine_view_view-View.html">Class View (engine/view/view~View) - CKEditor 5 API docs</a>
+     */
     class View implements ckutils.Emitter, ckutils.Observable {
         // TODO
+
+        // Properties
+        readonly document: Document;
+        readonly domConverter: DomConverter;
+        readonly domRoots: Map<string, HTMLElement>;
+        readonly hasDomSelection: boolean;
+        readonly isRenderingInProgress: boolean;
+
+        constructor(stylesProcessor: StylesProcessor);
 
         // Emitter
         delegate(...events: string[]): ckutils.EmitterMixinDelegateChain;
