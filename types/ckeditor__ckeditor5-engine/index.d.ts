@@ -3,8 +3,15 @@
 // Definitions by: denisname <https://github.com/denisname>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
+/// <reference lib="dom" />
 
-import * as ckutils from "ckeditor__ckeditor5-utils";
+import * as ckutils from "@ckeditor/ckeditor5-utils";
+
+// Prevent to export automatically, especially the alias DomNode.
+export {};
+
+// Alias for Node from lib/dom, as we will define our own Node type.
+type DomNode = Node;
 
 export namespace controller {
     // engine/controller/datacontroller
@@ -872,7 +879,13 @@ export namespace view {
         // engine/view/observer/domeventdata
 
         class DomEventData {
-            // TODO
+            readonly target: Element;
+
+            constructor(view: View, domEvent: Event, additionalData?: any);
+
+            preventDefault(): void;
+
+            stopPropagation(): void;
         }
 
         // engine/view/observer/domeventobserver
@@ -943,12 +956,14 @@ export namespace view {
 
         // engine/view/observer/observer
 
-        class Observer {
+        abstract class Observer {
             readonly document: Document;
             readonly isEnabled: boolean;
             readonly view: View;
 
             constructor(view: View);
+
+            checkShouldIgnoreEventFromTarget(domTarget: DomNode): boolean;
             destroy(): void;
             disable(): void;
             enable(): void;
