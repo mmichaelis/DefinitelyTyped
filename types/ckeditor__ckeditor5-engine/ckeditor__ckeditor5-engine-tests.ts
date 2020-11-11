@@ -1,5 +1,29 @@
 import * as engine from "ckeditor__ckeditor5-engine";
 
+// engine/view/elementdefinition (Module) ======================================
+
+declare let viewDefinition: engine.view.ElementDefinition;
+
+viewDefinition = "p";
+
+viewDefinition = {
+    name: "h1",
+    classes: ["foo", "bar"],
+};
+
+viewDefinition = {
+    name: "span",
+    styles: {
+        "font-size": "12px",
+        "font-weight": "bold",
+    },
+    attributes: {
+        "data-id": "123",
+    }
+};
+
+// engine/view/matcher (Module) ================================================
+
 declare let pattern: engine.view.MatcherPattern;
 
 pattern = {name: /^p/};
@@ -50,7 +74,7 @@ pattern = (element: engine.view.Element) => {
 pattern = (element: engine.view.Element) => {
     if (element.name === "p") {
         const fontSize = element.getStyle("font-size")!;
-        const size = fontSize.match(/(\d+)/px);
+        const size = fontSize.match(/(\d+)px/);
 
         if (size && Number(size[1]) > 26) {
             return {name: true, attribute: ["font-size"]};
@@ -58,24 +82,4 @@ pattern = (element: engine.view.Element) => {
     }
 
     return null;
-};
-
-declare let viewDefinition: engine.view.ElementDefinition;
-
-viewDefinition = "p";
-
-viewDefinition = {
-    name: "h1",
-    classes: ["foo", "bar"],
-};
-
-viewDefinition = {
-    name: "span",
-    styles: {
-        "font-size": "12px",
-        "font-weight": "bold",
-    },
-    attributes: {
-        "data-id": "123",
-    }
 };
