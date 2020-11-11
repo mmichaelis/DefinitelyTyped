@@ -1,6 +1,7 @@
 // Type definitions for @ckeditor/ckeditor5-core 23.1
 // Project: https://github.com/ckeditor/ckeditor5-core, https://ckeditor.com/ckeditor-5
 // Definitions by: denisname <https://github.com/denisname>
+//                 Mark Michaelis <https://github.com/mmichaelis>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 // TypeScript Version: 2.3
 
@@ -217,9 +218,11 @@ export class PendingActions extends Plugin {
 
 export abstract class Plugin<T = void> implements ckutils.Emitter, ckutils.Observable {
     readonly editor: editor.Editor;
+    readonly isEnabled: boolean;
 
+    static readonly isContextPlugin: boolean;
     static readonly pluginName?: string;
-    static readonly requires?: Array<new(editor: editor.Editor) => Plugin>;
+    static readonly requires?: Array<new(editor: editor.Editor) => Plugin<any>>;
 
     constructor(editor: editor.Editor);
     afterInit?(): null | Promise<T>;
