@@ -15,7 +15,9 @@ declare let _htmlElement: HTMLElement;
 
 declare let _document: engine.view.Document;
 declare let _domConverter: engine.view.DomConverter;
+declare let _domEventData: engine.view.observer.DomEventData;
 declare let _domEventObserver: engine.view.observer.DomEventObserver;
+declare let _element: engine.view.Element;
 declare let _elementDefinition: engine.view.ElementDefinition;
 declare let _matcherPattern: engine.view.MatcherPattern;
 declare let _observer: engine.view.observer.Observer;
@@ -117,6 +119,19 @@ _matcherPattern = (element: engine.view.Element) => {
 };
 
 // engine/view/observer (Module) ===============================================
+
+// DomEventData ----------------------------------------------------------------
+
+// No default constructor
+// $ExpectError
+_domEventData = new engine.view.observer.DomEventData();
+_domEventData = new engine.view.observer.DomEventData(_view, _event);
+_domEventData = new engine.view.observer.DomEventData(_view, _event, _any);
+
+_element = _domEventData.target;
+
+_domEventData.preventDefault();
+_domEventData.stopPropagation();
 
 // DomEventObserver ------------------------------------------------------------
 
